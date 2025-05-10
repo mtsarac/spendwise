@@ -1,32 +1,30 @@
-import {
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  UserButton,
-} from "@clerk/nextjs";
-import React from "react";
+import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
+import MobileNavbar from "./MobileNavbar";
+import DesktopNavbar from "./DesktopNavbar";
 
-const Navbar = () => {
+async function Navbar() {
+  const user = await currentUser();
+  //   if (user) await syncUser(); // POST
+
   return (
-    <div>
-      <header className="flex justify-end items-center p-4 gap-4 h-16">
-        <SignedOut>
-          <SignInButton mode="modal">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-              Sign in
-            </button>
-          </SignInButton>
-          <SignUpButton mode="modal">
-            <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-400">Sign up</button>
-          </SignUpButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-    </div>
-  );
-};
+    <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link
+              href="/"
+              className="text-xl font-bold text-primary font-mono tracking-wider"
+            >
+              Spendwise
+            </Link>
+          </div>
 
+          <DesktopNavbar />
+          <MobileNavbar />
+        </div>
+      </div>
+    </nav>
+  );
+}
 export default Navbar;
