@@ -1,4 +1,4 @@
-# Spendwise
+# Spendwise || WIP!!!!
 
 A personal finance management app to track your expenses and income.
 
